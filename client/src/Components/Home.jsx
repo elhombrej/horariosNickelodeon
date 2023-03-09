@@ -8,6 +8,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
+import Calendar from "./calendar";
+import NavegationBar from "./NavegationBar";
 
 dayjs.extend(isBetweenPlugin);
 
@@ -67,7 +69,7 @@ Day.propTypes = {
   selectedDay: PropTypes.object,
 };
 
-export function Home() {
+export function Home({ mode, setMode }) {
   const [value, setValue] = React.useState(dayjs("2022-04-17"));
 
   return (
@@ -77,8 +79,9 @@ export function Home() {
         minWidth: "100vw",
       }}
     >
+      <NavegationBar mode={mode} setMode={setMode} />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateCalendar
+        {/* <DateCalendar
           value={value}
           onChange={(newValue) => setValue(newValue)}
           slots={{ day: Day }}
@@ -87,7 +90,8 @@ export function Home() {
               selectedDay: value,
             },
           }}
-        />
+        /> */}
+        <Calendar />
       </LocalizationProvider>
     </Paper>
   );

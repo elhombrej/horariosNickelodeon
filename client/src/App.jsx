@@ -50,7 +50,7 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={darkModeTheme}>
-        <NavegationBar mode={mode} setMode={setMode} />
+        {/* <NavegationBar mode={mode} setMode={setMode} /> */}
         <Routes>
           <Route path="/" element={<Home mode={mode} setMode={setMode} />} />
         </Routes>
