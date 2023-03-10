@@ -10,6 +10,10 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import Calendar from "./calendar";
 import NavegationBar from "./NavegationBar";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
 dayjs.extend(isBetweenPlugin);
 
@@ -72,6 +76,36 @@ Day.propTypes = {
 export function Home({ mode, setMode }) {
   const [value, setValue] = React.useState(dayjs("2022-04-17"));
 
+  const handleDateClick = (arg) => {
+    // bind with an arrow function
+    alert(arg.dateStr);
+  };
+
+  const handleEvent = () => {
+    var dateStr = prompt("Enter a date in YYYY-MM-DD format");
+    var date = new Date(dateStr + "T00:00:00"); // will be in local time
+
+    if (!isNaN(date.valueOf())) {
+      FullCalendar.Calendar.addEvent({
+        title: "dynamic event",
+        start: date,
+        allDay: true,
+      });
+      alert("Great. Now, update your database...");
+    } else {
+      alert("Invalid date.");
+    }
+  };
+
+  // const renderEventContent = (eventInfo) => {
+  //   return (
+  //     <>
+  //       <b>{eventInfo.timeText}</b>
+  //       <i>{eventInfo.event.title}</i>
+  //     </>
+  //   );
+  // };
+
   return (
     <Paper
       sx={{
@@ -91,7 +125,25 @@ export function Home({ mode, setMode }) {
             },
           }}
         /> */}
-        <Calendar />
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          droppable={true}
+          initialView={"dayGridMonth"}
+          headerToolbar={{
+            start: "today prev,next", // will normally be on the left. if RTL, will be on the right
+            center: "addEventButton",
+            end: "dayGridMonth,timeGridWeek,timeGridDay", // will normally be on the right. if RTL, will be on the left
+          }}
+          height={"90vh"}
+          dateClick={handleDateClick}
+          // eventContent={renderEventContent}
+          customButtons={{
+            addEventButton: {
+              text: "add event...",
+              click: {handleEvent},
+            },
+          }}
+        />
       </LocalizationProvider>
     </Paper>
   );
