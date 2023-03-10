@@ -11,7 +11,7 @@ const LandingPage = () => {
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          height: 625,
+          minHeight: "100vh",
           width: "100%",
         }}
       >
