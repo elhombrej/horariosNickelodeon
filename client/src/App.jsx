@@ -7,6 +7,7 @@ import {
 } from "@mui/material/styles";
 import { useState } from "react";
 import NavegationBar from "./Components/NavegationBar";
+import LandingPage from "./Components/LandingPage";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -52,7 +53,8 @@ function App() {
       <ThemeProvider theme={darkModeTheme}>
         {/* <NavegationBar mode={mode} setMode={setMode} /> */}
         <Routes>
-          <Route path="/" element={<Home mode={mode} setMode={setMode} />} />
+          <Route exact path="/"  element={<LandingPage mode={mode} setMode={setMode}/>} />
+          <Route path="/home" element={<Home mode={mode} setMode={setMode} />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
