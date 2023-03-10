@@ -34,6 +34,8 @@ import { useSelector } from "react-redux";
 import { useTheme } from "@mui/material/styles";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { Calendar } from '@fullcalendar/core';
+import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -66,6 +68,15 @@ const NavegationBar = ({ mode, setMode }) => {
   const theme = useTheme();
 
   const [checked, setChecked] = useState(true);
+
+  let calendar = new Calendar(calendarEl, {
+    plugins: [ interactionPlugin ],
+    droppable: true
+  });
+
+
+
+  new Draggable(draggableEl)
 
 
   return (
@@ -207,6 +218,9 @@ const NavegationBar = ({ mode, setMode }) => {
             </Drawer>
 
           </Box>
+          <Typography calendar={calendar}>
+            Hola
+          </Typography>
 
           <Typography
             variant='h4'
